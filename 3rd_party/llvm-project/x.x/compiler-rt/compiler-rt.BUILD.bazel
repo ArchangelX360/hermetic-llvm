@@ -268,9 +268,13 @@ filter_builtin_sources(
         ":builtins_generic_tf_sources",
         ":builtins_x86_arch_sources",
     ] + select({
-        "@platforms//os:windows": [
+        "@llvm//constraints/windows/abi:gnu": [
             "lib/builtins/x86_64/chkstk.S",
         ],
+        "@llvm//constraints/windows/abi:gnullvm": [
+            "lib/builtins/x86_64/chkstk.S",
+        ],
+        "@llvm//constraints/windows/abi:msvc": [],
         "//conditions:default": [
             "lib/builtins/x86_64/floatundidf.S",
             "lib/builtins/x86_64/floatundisf.S",
@@ -300,9 +304,13 @@ filter_builtin_sources(
         ":builtins_generic_srcs",
         ":builtins_generic_tf_sources",
     ] + select({
-        "@platforms//os:windows": [
+        "@llvm//constraints/windows/abi:gnu": [
             "lib/builtins/aarch64/chkstk.S",  # if MINGW
         ],
+        "@llvm//constraints/windows/abi:gnullvm": [
+            "lib/builtins/aarch64/chkstk.S",  # if MINGW
+        ],
+        "@llvm//constraints/windows/abi:msvc": [],
         "//conditions:default": [],
     }),
 )
