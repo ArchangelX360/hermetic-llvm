@@ -258,7 +258,10 @@ cc_args(
 cc_args(
     name = "llvm_coverage_map_format_link_args",
     actions = ["@rules_cc//cc/toolchains/actions:link_actions"],
-    args = ["-fprofile-instr-generate"] + select({
+    args = select({
+        "@llvm//constraints/windows/abi:msvc": [],
+        "//conditions:default": ["-fprofile-instr-generate"],
+    }) + select({
         "@llvm//constraints/windows/abi:gnu": [
             "-Wl,-u,__llvm_profile_runtime",
             "-Wl,/include:__llvm_profile_runtime",

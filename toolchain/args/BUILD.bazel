@@ -230,9 +230,12 @@ cc_args(
     actions = [
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
-    args = [
-        "-fsanitize=undefined",
-    ],
+    args = select({
+        "@llvm//constraints/windows/abi:msvc": [],
+        "//conditions:default": [
+            "-fsanitize=undefined",
+        ],
+    }),
 )
 
 cc_args_list(
@@ -275,14 +278,17 @@ cc_args(
     actions = [
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
-    args = [
-        "-fsanitize=cfi-icall",
-        "-flto",
-        "-fvisibility=hidden",
-        "-fno-sanitize-trap=cfi",
-        "-fno-sanitize-ignorelist",
-        "-fsanitize-ignorelist={cfi_ignore}",
-    ],
+    args = select({
+        "@llvm//constraints/windows/abi:msvc": [],
+        "//conditions:default": [
+            "-fsanitize=cfi-icall",
+            "-flto",
+            "-fvisibility=hidden",
+            "-fno-sanitize-trap=cfi",
+            "-fno-sanitize-ignorelist",
+            "-fsanitize-ignorelist={cfi_ignore}",
+        ],
+    }),
     data = ["//sanitizers:cfi_ignore"],
     format = {
         "cfi_ignore": "//sanitizers:cfi_ignore",
@@ -325,9 +331,12 @@ cc_args(
     actions = [
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
-    args = [
-        "-fsanitize=memory",
-    ],
+    args = select({
+        "@llvm//constraints/windows/abi:msvc": [],
+        "//conditions:default": [
+            "-fsanitize=memory",
+        ],
+    }),
 )
 
 cc_args_list(
@@ -372,9 +381,12 @@ cc_args(
     actions = [
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
-    args = [
-        "-fsanitize=dataflow",
-    ],
+    args = select({
+        "@llvm//constraints/windows/abi:msvc": [],
+        "//conditions:default": [
+            "-fsanitize=dataflow",
+        ],
+    }),
 )
 
 cc_args_list(
@@ -413,9 +425,12 @@ cc_args(
     actions = [
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
-    args = [
-        "-fsanitize=numerical",
-    ],
+    args = select({
+        "@llvm//constraints/windows/abi:msvc": [],
+        "//conditions:default": [
+            "-fsanitize=numerical",
+        ],
+    }),
 )
 
 cc_args_list(
@@ -454,9 +469,12 @@ cc_args(
     actions = [
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
-    args = [
-        "-fsanitize=safe-stack",
-    ],
+    args = select({
+        "@llvm//constraints/windows/abi:msvc": [],
+        "//conditions:default": [
+            "-fsanitize=safe-stack",
+        ],
+    }),
 )
 
 cc_args_list(
@@ -495,9 +513,12 @@ cc_args(
     actions = [
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
-    args = [
-        "-fsanitize=realtime",
-    ],
+    args = select({
+        "@llvm//constraints/windows/abi:msvc": [],
+        "//conditions:default": [
+            "-fsanitize=realtime",
+        ],
+    }),
 )
 
 cc_args_list(
@@ -536,9 +557,12 @@ cc_args(
     actions = [
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
-    args = [
-        "-fsanitize=type",
-    ],
+    args = select({
+        "@llvm//constraints/windows/abi:msvc": [],
+        "//conditions:default": [
+            "-fsanitize=type",
+        ],
+    }),
 )
 
 cc_args_list(
@@ -577,9 +601,12 @@ cc_args(
     actions = [
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
-    args = [
-        "-fsanitize=thread",
-    ],
+    args = select({
+        "@llvm//constraints/windows/abi:msvc": [],
+        "//conditions:default": [
+            "-fsanitize=thread",
+        ],
+    }),
 )
 
 cc_args_list(
@@ -618,9 +645,12 @@ cc_args(
     actions = [
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
-    args = [
-        "-fsanitize=address",
-    ],
+    args = select({
+        "@llvm//constraints/windows/abi:msvc": [],
+        "//conditions:default": [
+            "-fsanitize=address",
+        ],
+    }),
 )
 
 cc_args_list(
@@ -659,9 +689,12 @@ cc_args(
     actions = [
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
-    args = [
-        "-fsanitize=leak",
-    ],
+    args = select({
+        "@llvm//constraints/windows/abi:msvc": [],
+        "//conditions:default": [
+            "-fsanitize=leak",
+        ],
+    }),
 )
 
 cc_args_list(
@@ -697,10 +730,13 @@ cc_args(
     actions = [
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
-    args = [
-        "-fxray-instrument",
-        "-fxray-modes=xray-basic",
-    ],
+    args = select({
+        "@llvm//constraints/windows/abi:msvc": [],
+        "//conditions:default": [
+            "-fxray-instrument",
+            "-fxray-modes=xray-basic",
+        ],
+    }),
 )
 
 cc_args_list(
@@ -733,9 +769,12 @@ cc_args(
     actions = [
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
-    args = [
-        "-fsanitize=fuzzer",
-    ],
+    args = select({
+        "@llvm//constraints/windows/abi:msvc": [],
+        "//conditions:default": [
+            "-fsanitize=fuzzer",
+        ],
+    }),
 )
 
 cc_args(
@@ -753,9 +792,12 @@ cc_args(
     actions = [
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
-    args = [
-        "-fprofile-instr-generate",
-    ],
+    args = select({
+        "@llvm//constraints/windows/abi:msvc": [],
+        "//conditions:default": [
+            "-fprofile-instr-generate",
+        ],
+    }),
 )
 
 cc_args(
