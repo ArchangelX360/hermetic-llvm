@@ -290,7 +290,6 @@ cc_args_list(
             "//toolchain/args/windows:mingw_headers_include_search_paths",
         ],
         "@llvm//constraints/windows/abi:msvc": [
-            "//toolchain/args:libcxx_headers_include_search_paths",
             "//toolchain/args/windows:msvc_headers_include_search_paths",
         ],
         "@llvm//constraints/windows/abi:unconstrained": [],

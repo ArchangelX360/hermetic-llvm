@@ -270,16 +270,18 @@ def declare_llvm_targets(*, suffix = ""):
         name = "windows_target_headers",
         srcs = [
             ":builtin_resource_dir",
-            "@llvm//runtimes/libcxx:libcxx_headers_include_search_directory",
-            "@llvm//runtimes/libcxx:libcxxabi_headers_include_search_directory",
         ] + select({
             "@llvm//constraints/windows/abi:gnu": [
+                "@llvm//runtimes/libcxx:libcxx_headers_include_search_directory",
+                "@llvm//runtimes/libcxx:libcxxabi_headers_include_search_directory",
                 "@mingw//:mingw_generated_headers_crt_directory",
                 "@mingw//:mingw_w64_headers_include_directory",
                 "@mingw//:mingw_w64_headers_crt_directory",
                 "@mingw//:mingw_w64_winpthreads_include_directory",
             ],
             "@llvm//constraints/windows/abi:gnullvm": [
+                "@llvm//runtimes/libcxx:libcxx_headers_include_search_directory",
+                "@llvm//runtimes/libcxx:libcxxabi_headers_include_search_directory",
                 "@mingw//:mingw_generated_headers_crt_directory",
                 "@mingw//:mingw_w64_headers_include_directory",
                 "@mingw//:mingw_w64_headers_crt_directory",

@@ -76,7 +76,7 @@ filegroup(
             "@llvm-project//libcxxabi:libcxxabi.static",
             "@llvm-project//libunwind:libunwind.static",
         ],
-        "@llvm//constraints/windows/abi:msvc": [],  # TODO: why?
+        "@llvm//constraints/windows/abi:msvc": [],  # Uses the MSVC STL from @msvc_runtime.
         "//conditions:default": [],
     }),
     visibility = ["//visibility:public"],
