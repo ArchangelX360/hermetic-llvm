@@ -128,12 +128,28 @@ cc_nested_args(
         ":msvc_optional_interface_library",
         ":msvc_optional_static_library",
         ":msvc_optional_dynamic_library",
+        ":msvc_optional_versioned_dynamic_library",
     ],
 )
 
 cc_args(
     name = "libraries_to_link_args_msvc",
     actions = ["@rules_cc//cc/toolchains/actions:link_actions"],
+    nested = [
+        ":thinlto_param_file_msvc",
+        ":libraries_to_link_values_msvc",
+    ],
+)
+
+cc_nested_args(
+    name = "thinlto_param_file_msvc",
+    args = ["@{param_file}"],
+    format = {"param_file": "@rules_cc//cc/toolchains/variables:thinlto_param_file"},
+    requires_not_none = "@rules_cc//cc/toolchains/variables:thinlto_param_file",
+)
+
+cc_nested_args(
+    name = "libraries_to_link_values_msvc",
     nested = [":libraries_to_link_expansion_msvc"],
     requires_not_none = "@rules_cc//cc/toolchains/variables:libraries_to_link",
 )
@@ -193,6 +209,14 @@ cc_nested_args(
     format = {"library": "@rules_cc//cc/toolchains/variables:libraries_to_link.name"},
     requires_equal = "@rules_cc//cc/toolchains/variables:libraries_to_link.type",
     requires_equal_value = "dynamic_library",
+)
+
+cc_nested_args(
+    name = "msvc_optional_versioned_dynamic_library",
+    args = ["{library}"],
+    format = {"library": "@rules_cc//cc/toolchains/variables:libraries_to_link.name"},
+    requires_equal = "@rules_cc//cc/toolchains/variables:libraries_to_link.type",
+    requires_equal_value = "versioned_dynamic_library",
 )
 
 cc_feature(
